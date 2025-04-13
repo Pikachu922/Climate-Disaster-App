@@ -1,4 +1,4 @@
-package com.nono.groupproject;
+package GroupProjectOOP2;
 
 import javax.swing.*;
 import java.awt.*;
