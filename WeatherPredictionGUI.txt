@@ -1,4 +1,4 @@
-package com.nono.groupproject;
+package GroupProjectOOP2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,10 +61,7 @@ public class WeatherPredictionGUI extends JFrame {
 }
 
         executorService = Executors.newSingleThreadScheduledExecutor();
-        int iterations = 1;
-        do {executorService.scheduleAtFixedRate(this::generatePrediction, 0, 5, TimeUnit.SECONDS);
-            iterations--;
-}       while (iterations > 0);
+        executorService.scheduleAtFixedRate(this::generatePrediction, 0, 5, TimeUnit.SECONDS);
 }
 
     private void stopPrediction() {
@@ -103,10 +100,11 @@ public class WeatherPredictionGUI extends JFrame {
         return dateFormat.format(currentDate.getTime());
 }
 
-/*    public static void main(String[] args) {
+    public static void main(String[] args) {
         new WeatherPredictionGUI();
-}*/
+}
 
     void createAndShowGUI() {
+        throw new UnsupportedOperationException("Not supported yet.");
 }
 }
