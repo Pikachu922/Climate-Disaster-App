@@ -1,4 +1,4 @@
-package com.nono.groupproject;
+package GroupProjectOOP2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,12 +6,9 @@ import java.awt.event.ActionEvent;
 
 public class Homepage7FeatureKeysGUIConsole extends JFrame {
 
-/*  public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-        Homepage7FeatureKeysGUIConsole homePage = new Homepage7FeatureKeysGUIConsole();
-        homePage.createAndShowGUI();
-});
-}*/
+    public static void main(String[] args) {
+        new Homepage7FeatureKeysGUIConsole().createAndShowGUI();
+}
 
     public void createAndShowGUI() {
         setTitle("Select Feature");
@@ -22,13 +19,13 @@ public class Homepage7FeatureKeysGUIConsole extends JFrame {
         panel.setPreferredSize(new Dimension(400, 400));
 
         String[] featureLabels = {
-        "Admin Registration",
-        "Volunteer Registration",
-        "Disaster Report",
-        "Safe Shelter",
-        "Fund Raising",
-        "Disaster Guide",
-        "Weather Prediction",
+            "Admin Registration",
+            "Volunteer Registration",
+            "Disaster Report",
+            "Safe Shelter",
+            "Fund Raising",
+            "Disaster Guide",
+            "Weather Prediction",
 };
 
         for (String label : featureLabels) {
@@ -64,39 +61,30 @@ public class Homepage7FeatureKeysGUIConsole extends JFrame {
 }
 
     private void openAdminAppGUI() {
-        SwingUtilities.invokeLater(() -> {
-        AdminRegistrationGUI adminWindowGUI = new AdminRegistrationGUI();
-        adminWindowGUI.createAndShowGUI();
-});
+        SwingUtilities.invokeLater(() -> new AdminRegistrationGUI().createAndShowGUI());
 }
 
     private void openVolunteerAppGUI() {
-        VolunteerRegistrationGUI volunteerAppGUI = new VolunteerRegistrationGUI();
-        volunteerAppGUI.createAndShowGUI();
+        new VolunteerRegistrationGUI().createAndShowGUI();
 }
 
     private void openDisasterReportGUI() {
-        DisasterReportGUI disasterReportGUI = new DisasterReportGUI();
-        disasterReportGUI.createAndShowGUI();
+        new DisasterReportGUI().createAndShowGUI();
 }
 
     private void openSafeShelterGUI() {
-        SafeShelterGUI safeShelterGUI = new SafeShelterGUI();
-        safeShelterGUI.createAndShowGUI();
+        new SafeShelterGUI().createAndShowGUI();
 }
 
     private void openFundRaisingGUI() {
-        FundRaisingGUI fundRaisingGUI = new FundRaisingGUI();
-        fundRaisingGUI.createAndShowGUI();
+        new FundRaisingGUI().createAndShowGUI();
 }
 
     private void openDisasterGuideGUI() {
-        DisasterGuideGUI disasterGuideGUI = new DisasterGuideGUI();
-        disasterGuideGUI.createAndShowGUI();
+        new DisasterGuideGUI().createAndShowGUI();
 }
 
     private void openWeatherPredictionGUI() {
-        WeatherPredictionGUI weatherPredictionGUI = new WeatherPredictionGUI();
-        weatherPredictionGUI.createAndShowGUI();
+        new WeatherPredictionGUI().createAndShowGUI();
 }
 }
