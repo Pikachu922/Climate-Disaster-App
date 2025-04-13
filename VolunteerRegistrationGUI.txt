@@ -1,4 +1,4 @@
-package com.nono.groupproject;
+package GroupProjectOOP2;
 
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -22,10 +22,10 @@ public class VolunteerRegistrationGUI extends JFrame {
         setTitle("Volunteer Registration");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
-       JPanel panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(11, 10, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(1, 8, 10, 8));
-        
+
         panel.add(new JLabel("Name:"));
         nameField = new JTextField();
         panel.add(nameField);
@@ -51,11 +51,11 @@ public class VolunteerRegistrationGUI extends JFrame {
         JButton registerButton = new JButton("Register");
         registerButton.addActionListener(e -> handleRegistration(e));
         panel.add(registerButton);
-        
+
         JButton rButton = new JButton("Return");
         rButton.addActionListener(e -> dispose());
         panel.add(rButton);
-        
+
         setContentPane(panel);
         pack();
         setLocationRelativeTo(null);
@@ -65,16 +65,17 @@ public class VolunteerRegistrationGUI extends JFrame {
     private void handleRegistration(ActionEvent e) {
         if (nameField.getText().isEmpty() || addressField.getText().isEmpty() || phoneNumberField.getText().isEmpty() || (!maleRadioButton.isSelected() && !femaleRadioButton.isSelected())) {
             JOptionPane.showMessageDialog(this, "Error, fill in the form first.", "Registration Error", JOptionPane.ERROR_MESSAGE);
-}       else {
+        } else {
             JOptionPane.showMessageDialog(this, "Registration Completed!");
             this.dispose();
 }
 }
 
-/*  public static void main(String[] args) {
+    public static void main(String[] args) {
         new VolunteerRegistrationGUI();
-}*/
+}
 
     void createAndShowGUI() {
+        throw new UnsupportedOperationException("Not supported yet.");
 }
 }
