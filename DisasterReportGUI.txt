@@ -1,4 +1,4 @@
-package com.nono.groupproject;
+package GroupProjectOOP2;
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -24,7 +24,7 @@ public class DisasterReportGUI extends JFrame {
         ArrayList<DisasterReport> reportList = new ArrayList<DisasterReport>();
         
         JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createEmptyBorder(1, 8,5, 8));
+        panel.setBorder(BorderFactory.createEmptyBorder(1, 8, 5, 8));
         setPreferredSize(new Dimension(400, 400));
         
         panel.setLayout(new GridLayout(10, 10, 10, 10));
@@ -65,15 +65,15 @@ public class DisasterReportGUI extends JFrame {
     private void handleRegistration(ActionEvent e) { 
         if (yourNameField.getText().isEmpty() || phoneNumberField.getText().isEmpty() || locationField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Error, fill the form first.", "Submission Error", JOptionPane.ERROR_MESSAGE);
-}       else {
+        } else {
             JOptionPane.showMessageDialog(this, "Report Submitted!");
             dispose();
 }
 }
-    
-/*  public static void main(String[] args) {
-        new DisasterReportGUI();
-}*/
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> new DisasterReportGUI());
+}
 
     void createAndShowGUI() {
 }
