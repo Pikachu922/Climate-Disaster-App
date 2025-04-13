@@ -1,4 +1,4 @@
-package com.nono.groupproject;
+package GroupProjectOOP2;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,12 +42,11 @@ public class FundRaisingGUI extends JFrame {
          
         donateButton = new JButton("Donate");
         donateButton.addActionListener(new ActionListener() {
-        @Override
-    public void actionPerformed(ActionEvent e) {
-        handleDonation();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleDonation();
 }
 });
-        
         panel.add(donateButton);
 
         setContentPane(panel);
@@ -63,13 +62,12 @@ public class FundRaisingGUI extends JFrame {
         String paymentMethod = (String) paymentMethodComboBox.getSelectedItem();
 
         if (name.isEmpty() || amountString.isEmpty() || phoneNumber.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please fill the form.");
-        return;
+            JOptionPane.showMessageDialog(this, "Please fill the form.");
+            return;
 }
 
         try {
             double amount = Double.parseDouble(amountString);
-
             String donationMessage = String.format("Thank you %s for your donation of RM%.2f using %s!", name, amount, paymentMethod);
             JOptionPane.showMessageDialog(this, donationMessage);
             dispose();
@@ -78,19 +76,14 @@ public class FundRaisingGUI extends JFrame {
             amountField.setText("");
             paymentMethodComboBox.setSelectedIndex(0);
 
-}       catch (NumberFormatException ex) {
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Please enter a valid donation amount.");
 }
 }
 
-/*    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-    public void run() {
+    public static void main(String[] args) {
         new FundRaisingGUI();
 }
-});
-}*/
 
-    void createAndShowGUI() {     
-}
+    void createAndShowGUI() { }
 }
