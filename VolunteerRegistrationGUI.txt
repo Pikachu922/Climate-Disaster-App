@@ -1,78 +1,107 @@
 package GroupProjectOOP2;
 
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
-public class VolunteerRegistrationGUI extends JFrame {
+public class WeatherPredictionGUI extends JFrame {
+    private final JTextArea textArea;
+    private final JButton startButton;
+    private final JButton stopButton;
+    private final JButton returnButton;
+    private ScheduledExecutorService executorService;
+    private volatile boolean isPredicting;
+    private Calendar currentDate;
 
-    private final JTextField nameField, addressField, phoneNumberField;
-    private final JRadioButton maleRadioButton, femaleRadioButton;
-    private final ButtonGroup sexButtonGroup;
-
-    public VolunteerRegistrationGUI() {
-        setTitle("Volunteer Registration");
+    public WeatherPredictionGUI() {
+        setTitle("Weather Prediction");
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setLocationRelativeTo(null);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(11, 10, 10, 10));
-        panel.setBorder(BorderFactory.createEmptyBorder(1, 8, 10, 8));
+        textArea = new JTextArea(15, 40);
+        textArea.setEditable(false);
 
-        panel.add(new JLabel("Name:"));
-        nameField = new JTextField();
-        panel.add(nameField);
-        nameField.setColumns(27);
+        startButton = new JButton("Start Prediction");
+        startButton.addActionListener(e -> startPrediction());
 
-        panel.add(new JLabel("Address:"));
-        addressField = new JTextField();
-        panel.add(addressField);
+        stopButton = new JButton("Stop Prediction");
+        stopButton.addActionListener(e -> stopPrediction());
+        stopButton.setEnabled(false);
 
-        panel.add(new JLabel("Phone Number:"));
-        phoneNumberField = new JTextField();
-        panel.add(phoneNumberField);
+        returnButton = new JButton("Return");
+        returnButton.addActionListener(e -> dispose());
 
-        panel.add(new JLabel("Sex:"));
-        maleRadioButton = new JRadioButton("Male");
-        femaleRadioButton = new JRadioButton("Female");
-        sexButtonGroup = new ButtonGroup();
-        sexButtonGroup.add(maleRadioButton);
-        sexButtonGroup.add(femaleRadioButton);
-        panel.add(maleRadioButton);
-        panel.add(femaleRadioButton);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(startButton);
+        buttonPanel.add(stopButton);
+        buttonPanel.add(returnButton);
 
-        JButton registerButton = new JButton("Register");
-        registerButton.addActionListener(e -> handleRegistration(e));
-        panel.add(registerButton);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(new JScrollPane(textArea), BorderLayout.CENTER);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
 
-        JButton rButton = new JButton("Return");
-        rButton.addActionListener(e -> dispose());
-        panel.add(rButton);
-
-        setContentPane(panel);
+        getContentPane().add(panel, BorderLayout.CENTER);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
 }
 
-    private void handleRegistration(ActionEvent e) {
-        if (nameField.getText().isEmpty() || addressField.getText().isEmpty() || phoneNumberField.getText().isEmpty() || (!maleRadioButton.isSelected() && !femaleRadioButton.isSelected())) {
-            JOptionPane.showMessageDialog(this, "Error, fill in the form first.", "Registration Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Registration Completed!");
-            this.dispose();
+    private void startPrediction() {
+        isPredicting = true;
+        startButton.setEnabled(false);
+        stopButton.setEnabled(true);
+
+        if (currentDate == null) {
+            currentDate = Calendar.getInstance();
 }
+
+        executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(this::generatePrediction, 0, 5, TimeUnit.SECONDS);
+}
+
+    private void stopPrediction() {
+        isPredicting = false;
+        if (executorService != null) {
+            executorService.shutdown();
+}
+
+        startButton.setEnabled(true);
+        stopButton.setEnabled(false);
+}
+
+    private void generatePrediction() {
+        if (!isPredicting) {
+            stopPrediction();
+            return;
+}
+
+        SwingUtilities.invokeLater(() -> {
+            String prediction = generateRandomPrediction();
+            String formattedDate = getCurrentDate();
+            textArea.append(formattedDate + " - " + prediction + "\n");
+            currentDate.add(Calendar.DAY_OF_MONTH, 1);
+});
+}
+
+    private String generateRandomPrediction() {
+        String[] weatherConditions = {"Sunny", "Cloudy", "Rainy", "Stormy"};
+        Random random = new Random();
+        int randomIndex = random.nextInt(weatherConditions.length);
+        return "Prediction: " + weatherConditions[randomIndex];
+}
+
+    private String getCurrentDate() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
+        return dateFormat.format(currentDate.getTime());
 }
 
     public static void main(String[] args) {
-        new VolunteerRegistrationGUI();
+        new WeatherPredictionGUI();
 }
 
     void createAndShowGUI() {
