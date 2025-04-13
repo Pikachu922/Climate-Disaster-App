@@ -1,4 +1,4 @@
-package com.nono.groupproject;
+package GroupProjectOOP2;
 
 import javax.swing.*;
 import javax.swing.event.*;
@@ -8,7 +8,6 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 
 public class SafeShelterGUI extends JFrame {
     
@@ -107,15 +106,16 @@ public class SafeShelterGUI extends JFrame {
         str.length() == 0 ? null : RowFilter.regexFilter("(?i)" + searchText));
 }
    
-/*  public static void main(String[] args) {
+    public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
-        @Override
-    public void run() {
-        new SafeShelterGUI();
+            @Override
+            public void run() {
+                new SafeShelterGUI();
 }
 });
-}*/
+}
 
     void createAndShowGUI() {
+        throw new UnsupportedOperationException("Not supported yet.");
 }
 }
